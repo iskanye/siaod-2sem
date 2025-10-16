@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1760555785 source:c:\users\iskan\onedrive\Рабочий стол\СиАОД\tree\main.cpp
+	<iostream>
+	<queue>
+	<algorithm>
+

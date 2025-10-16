@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1757851646 source:c:\users\iskan\onedrive\Рабочий стол\СиАОД\hash\main.cpp
+	<ctime>
+	<iostream>
+	<algorithm>
+	<string>
+

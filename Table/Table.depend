@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1758194376 source:c:\users\iskan\onedrive\Рабочий стол\СиАОД\table\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<ctime>
+	<algorithm>
+	<random>
+	<chrono>
+

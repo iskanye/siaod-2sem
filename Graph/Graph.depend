@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1760599339 source:c:\users\iskan\onedrive\Рабочий стол\СиАОД\graph\main.cpp
+	<iostream>
+	<vector>
+	<queue>
+	<climits>
+	<algorithm>
+	<stdlib.h>
+

@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1756986438 source:c:\users\iskan\onedrive\Рабочий стол\СиАОД\binary operators\main.cpp
+	<iostream>
+
+1756987359 source:c:\users\iskan\onedrive\Рабочий стол\СиАОД\binary operators\byteop.cpp
+	<cstdlib>
+	<iostream>
+	<Windows.h>
+	<bitset>
+

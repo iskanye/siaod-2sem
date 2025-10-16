@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1759056136 source:c:\users\iskan\onedrive\Рабочий стол\СиАОД\text\main.cpp
+	<iostream>
+	<sstream>
+	<unordered_map>
+	<vector>
+	<unordered_set>
+

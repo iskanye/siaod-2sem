@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1757071486 source:c:\users\iskan\onedrive\Рабочий стол\СиАОД\sort\main.cpp
+	<iostream>
+	<bitset>
+	<vector>
+
+1757075045 source:c:\users\iskan\onedrive\Рабочий стол\СиАОД\sort\sort.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<vector>
+	<ctime>
+
