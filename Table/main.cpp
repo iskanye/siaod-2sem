@@ -10,44 +10,44 @@ using namespace std;
 
 const string DISEASES[] = {"A01", "B14", "C08", "A02", "A21", "A14", "B01", "B32",
     "C11", "B21", "B45", "C06", "A12", "B20", "B09", "C06", "C26"};
-const string DOCTORS[] = {"Лубеников", "Горбунов", "Бандурина", "Шатрова",
-    "Ардашева", "Гурчиани", "Рябов", "Зыкова", "Калмыков", "Петрунина",
-    "Ильина", "Максимов"};
+const string DOCTORS[] = {"Р›СѓР±РµРЅРёРєРѕРІ", "Р“РѕСЂР±СѓРЅРѕРІ", "Р‘Р°РЅРґСѓСЂРёРЅР°", "РЁР°С‚СЂРѕРІР°",
+    "РђСЂРґР°С€РµРІР°", "Р“СѓСЂС‡РёР°РЅРё", "Р СЏР±РѕРІ", "Р—С‹РєРѕРІР°", "РљР°Р»РјС‹РєРѕРІ", "РџРµС‚СЂСѓРЅРёРЅР°",
+    "РР»СЊРёРЅР°", "РњР°РєСЃРёРјРѕРІ"};
 const int N = 600000;
 
-// Размеры полей структуры Patient
+// Р Р°Р·РјРµСЂС‹ РїРѕР»РµР№ СЃС‚СЂСѓРєС‚СѓСЂС‹ Patient
 const size_t cardNumSize = sizeof(unsigned long);
 const size_t diseaseNumSize = 4;
 const size_t doctorNameSize = 20;
 
-// Данные пациента
+// Р”Р°РЅРЅС‹Рµ РїР°С†РёРµРЅС‚Р°
 struct Patient {
     unsigned long cardNum;
     char* diseaseNum;
     char* doctorName;
 
-    // Переопределяем оператор для сортировки
+    // РџРµСЂРµРѕРїСЂРµРґРµР»СЏРµРј РѕРїРµСЂР°С‚РѕСЂ РґР»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё
     bool operator<(const Patient& other) const {
         return cardNum < other.cardNum;
     }
 };
 
-// Для быстрого конвертирования
+// Р”Р»СЏ Р±С‹СЃС‚СЂРѕРіРѕ РєРѕРЅРІРµСЂС‚РёСЂРѕРІР°РЅРёСЏ
 union LongByte {
     unsigned long asLong;
     char asBytes[4];
 };
 
-// Функция поиска
+// Р¤СѓРЅРєС†РёСЏ РїРѕРёСЃРєР°
 typedef int (*searchFunc)(Patient*, unsigned long);
 
-// Записывает данные в текстовый файл
+// Р—Р°РїРёСЃС‹РІР°РµС‚ РґР°РЅРЅС‹Рµ РІ С‚РµРєСЃС‚РѕРІС‹Р№ С„Р°Р№Р»
 void writeTxtFile() {
     ofstream out("patients.txt");
     random_device rd;
-    mt19937 gen(rd()); // Генератор случайных чисел
+    mt19937 gen(rd()); // Р“РµРЅРµСЂР°С‚РѕСЂ СЃР»СѓС‡Р°Р№РЅС‹С… С‡РёСЃРµР»
 
-    // Создание диапазона чисел
+    // РЎРѕР·РґР°РЅРёРµ РґРёР°РїР°Р·РѕРЅР° С‡РёСЃРµР»
     vector<unsigned long> cards;
     for (unsigned long i = 0; i < N; i++) {
         cards.push_back(i);
@@ -65,17 +65,17 @@ void writeTxtFile() {
     out.close();
 }
 
-// Читает данные из текстого файла и конвертирует их в бинарный файл
+// Р§РёС‚Р°РµС‚ РґР°РЅРЅС‹Рµ РёР· С‚РµРєСЃС‚РѕРіРѕ С„Р°Р№Р»Р° Рё РєРѕРЅРІРµСЂС‚РёСЂСѓРµС‚ РёС… РІ Р±РёРЅР°СЂРЅС‹Р№ С„Р°Р№Р»
 void convertToBin() {
     ifstream in("patients.txt");
     ofstream out("patients.bin", ios::binary);
 
-    // Буфер
+    // Р‘СѓС„РµСЂ
     string line;
     size_t prev;
     size_t next;
     while (getline(in, line)) {
-        // Находит первую подстроку до разделителя
+        // РќР°С…РѕРґРёС‚ РїРµСЂРІСѓСЋ РїРѕРґСЃС‚СЂРѕРєСѓ РґРѕ СЂР°Р·РґРµР»РёС‚РµР»СЏ
         next = line.find("|");
         auto cardNumStr = line.substr(0, next);
         LongByte cardNum;
@@ -88,7 +88,7 @@ void convertToBin() {
 
         auto doctorName = line.substr(prev);
 
-        // Записывает в файл блок данных заданного размером
+        // Р—Р°РїРёСЃС‹РІР°РµС‚ РІ С„Р°Р№Р» Р±Р»РѕРє РґР°РЅРЅС‹С… Р·Р°РґР°РЅРЅРѕРіРѕ СЂР°Р·РјРµСЂРѕРј
         out.write(cardNum.asBytes, cardNumSize);
         out.write(diseaseNum.c_str(), sizeof(char) * diseaseNumSize);
         out.write(doctorName.c_str(), sizeof(char) * doctorNameSize);
@@ -98,24 +98,24 @@ void convertToBin() {
     out.close();
 }
 
-// Читает данные из бинарника
+// Р§РёС‚Р°РµС‚ РґР°РЅРЅС‹Рµ РёР· Р±РёРЅР°СЂРЅРёРєР°
 Patient* readFromBin() {
     ifstream in("patients.bin", ios::binary);
     Patient* result = new Patient[N];
 
     for (int i = 0; i < N; i++) {
-        // Создаем указатель на данные пациента
+        // РЎРѕР·РґР°РµРј СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РґР°РЅРЅС‹Рµ РїР°С†РёРµРЅС‚Р°
         Patient patient;
-        // Инициализирую байты каждого свойства структуры
+        // РРЅРёС†РёР°Р»РёР·РёСЂСѓСЋ Р±Р°Р№С‚С‹ РєР°Р¶РґРѕРіРѕ СЃРІРѕР№СЃС‚РІР° СЃС‚СЂСѓРєС‚СѓСЂС‹
         LongByte cardNum;
         patient.diseaseNum = new char[diseaseNumSize];
         patient.doctorName = new char[doctorNameSize];
-        // Читаем каждое поле побайтово
+        // Р§РёС‚Р°РµРј РєР°Р¶РґРѕРµ РїРѕР»Рµ РїРѕР±Р°Р№С‚РѕРІРѕ
         in.read(cardNum.asBytes, cardNumSize);
         patient.cardNum = cardNum.asLong;
         in.read(patient.diseaseNum, diseaseNumSize);
         in.read(patient.doctorName, doctorNameSize);
-        // Записывает в массив указатель на данные пациента
+        // Р—Р°РїРёСЃС‹РІР°РµС‚ РІ РјР°СЃСЃРёРІ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РґР°РЅРЅС‹Рµ РїР°С†РёРµРЅС‚Р°
         result[i] = patient;
     }
 
@@ -123,7 +123,7 @@ Patient* readFromBin() {
     return result;
 }
 
-// Линейный поиск
+// Р›РёРЅРµР№РЅС‹Р№ РїРѕРёСЃРє
 int linearSearch(Patient* array, unsigned long toFind) {
     for (int i = 0; i < N; i++) {
         if (array[i].cardNum == toFind) {
@@ -134,15 +134,15 @@ int linearSearch(Patient* array, unsigned long toFind) {
     return -1; // Not found
 }
 
-// Интерполяционный поиск
+// РРЅС‚РµСЂРїРѕР»СЏС†РёРѕРЅРЅС‹Р№ РїРѕРёСЃРє
 int interpolationSearch(Patient* array, unsigned long toFind) {
     int mid;
-    // Возвращает индекс элемента со значением toFind или -1, если такого элемента не существует
+    // Р’РѕР·РІСЂР°С‰Р°РµС‚ РёРЅРґРµРєСЃ СЌР»РµРјРµРЅС‚Р° СЃРѕ Р·РЅР°С‡РµРЅРёРµРј toFind РёР»Рё -1, РµСЃР»Рё С‚Р°РєРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚
     int low = 0;
     int high = N - 1;
 
     while (array[low].cardNum < toFind && array[high].cardNum > toFind) {
-        if (array[high].cardNum == array[low].cardNum) // Защита от деления на 0
+        if (array[high].cardNum == array[low].cardNum) // Р—Р°С‰РёС‚Р° РѕС‚ РґРµР»РµРЅРёСЏ РЅР° 0
             break;
         mid = low + ((toFind - array[low].cardNum) * (high - low)) / (array[high].cardNum - array[low].cardNum);
 
@@ -162,10 +162,10 @@ int interpolationSearch(Patient* array, unsigned long toFind) {
     return -1; // Not found
 }
 
-// Поиск значения по ключу
+// РџРѕРёСЃРє Р·РЅР°С‡РµРЅРёСЏ РїРѕ РєР»СЋС‡Сѓ
 void searchNum(Patient* patients, searchFunc search) {
     int cardNum;
-    cout << "Введите нужный номер карты: ";
+    cout << "Р’РІРµРґРёС‚Рµ РЅСѓР¶РЅС‹Р№ РЅРѕРјРµСЂ РєР°СЂС‚С‹: ";
     cin >> cardNum;
     auto begin = chrono::steady_clock::now();
     int found = search(patients, cardNum);
@@ -177,13 +177,13 @@ void searchNum(Patient* patients, searchFunc search) {
                 patient.diseaseNum << " " <<
                 patient.doctorName << endl;
     } else {
-        cout << "Карта не найдена";
+        cout << "РљР°СЂС‚Р° РЅРµ РЅР°Р№РґРµРЅР°";
     }
 
-    cout << "Прошло: " << chrono::duration_cast<chrono::milliseconds>(end - begin).count() << " мс" << endl;
+    cout << "РџСЂРѕС€Р»Рѕ: " << chrono::duration_cast<chrono::milliseconds>(end - begin).count() << " РјСЃ" << endl;
 }
 
-// Вывод на экран информации о пациентах
+// Р’С‹РІРѕРґ РЅР° СЌРєСЂР°РЅ РёРЅС„РѕСЂРјР°С†РёРё Рѕ РїР°С†РёРµРЅС‚Р°С…
 void printPatiens(Patient* patients) {
     for (int i = 0; i < N; i++) {
         cout << patients[i].cardNum << " " <<
@@ -202,13 +202,13 @@ int main()
 
     // printPatiens(patients);
 
-    // Линейный поиск
+    // Р›РёРЅРµР№РЅС‹Р№ РїРѕРёСЃРє
     searchNum(patients, &linearSearch);
 
-    // Сортирую массив Patient (необходимо для интерполяционного поиска)
+    // РЎРѕСЂС‚РёСЂСѓСЋ РјР°СЃСЃРёРІ Patient (РЅРµРѕР±С…РѕРґРёРјРѕ РґР»СЏ РёРЅС‚РµСЂРїРѕР»СЏС†РёРѕРЅРЅРѕРіРѕ РїРѕРёСЃРєР°)
     sort(patients, patients + N);
 
-    // Интерполяционный поиск
+    // РРЅС‚РµСЂРїРѕР»СЏС†РёРѕРЅРЅС‹Р№ РїРѕРёСЃРє
     searchNum(patients, &interpolationSearch);
 
     return 0;

@@ -84,7 +84,7 @@ string removeWordOccurrences(string text, string pattern) {
         res += text[i];
     }
 
-    // Удалить все пробелы
+    // РЈРґР°Р»РёС‚СЊ РІСЃРµ РїСЂРѕР±РµР»С‹
     istringstream in(res);
     string result, word;
 
@@ -102,12 +102,12 @@ int main() {
     cout << removeRepeatedWords(sentence) << endl;
 
     string word;
-    cout << "Введите предложение: ";
+    cout << "Р’РІРµРґРёС‚Рµ РїСЂРµРґР»РѕР¶РµРЅРёРµ: ";
     getline(cin, sentence);
-    cout << "Введите удаляемое слово: ";
+    cout << "Р’РІРµРґРёС‚Рµ СѓРґР°Р»СЏРµРјРѕРµ СЃР»РѕРІРѕ: ";
     cin >> word;
 
     string result = removeWordOccurrences(sentence, word);
-    cout << "Результат: " << result << endl;
+    cout << "Р РµР·СѓР»СЊС‚Р°С‚: " << result << endl;
     return 0;
 }

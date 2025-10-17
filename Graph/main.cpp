@@ -18,54 +18,54 @@ class Graph {
     int vertices;
     vector<vector<Edge>> edges;
 public:
-    // Конструктор
+    // РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
     Graph(int v) : vertices(v), edges(v) {}
 
-    // Добавление ребра в граф
+    // Р”РѕР±Р°РІР»РµРЅРёРµ СЂРµР±СЂР° РІ РіСЂР°С„
     void addEdge(int source, int destination, int weight) {
         edges[source].push_back(Edge(destination, weight));
     }
 
-    // Вывод графа
+    // Р’С‹РІРѕРґ РіСЂР°С„Р°
     void printGraph() {
-        cout << "Структура графа:" << endl;
+        cout << "РЎС‚СЂСѓРєС‚СѓСЂР° РіСЂР°С„Р°:" << endl;
         for (int i = 0; i < vertices; i++) {
-            cout << "Вершина " << i << " соединена с: ";
+            cout << "Р’РµСЂС€РёРЅР° " << i << " СЃРѕРµРґРёРЅРµРЅР° СЃ: ";
             for (auto& edge : edges[i]) {
-                cout << "(" << edge.destination << ", вес: " << edge.weight << ") ";
+                cout << "(" << edge.destination << ", РІРµСЃ: " << edge.weight << ") ";
             }
             cout << endl;
         }
     }
 
-    // Получение количества вершин
+    // РџРѕР»СѓС‡РµРЅРёРµ РєРѕР»РёС‡РµСЃС‚РІР° РІРµСЂС€РёРЅ
     int getVerticesCount() {
         return vertices;
     }
 
-    // Алгоритм Дейкстры для нахождения кратчайшего пути
+    // РђР»РіРѕСЂРёС‚Рј Р”РµР№РєСЃС‚СЂС‹ РґР»СЏ РЅР°С…РѕР¶РґРµРЅРёСЏ РєСЂР°С‚С‡Р°Р№С€РµРіРѕ РїСѓС‚Рё
     vector<int> dijkstra(int startVertex, int endVertex);
 };
 
 vector<int> Graph::dijkstra(int startVertex, int endVertex) {
     vector<int> weights(vertices, INT_MAX), previous(vertices, -1);
     vector<bool> visited(vertices, false);
-    // Приоритетная очередь для выбора вершины с минимальным расстоянием
+    // РџСЂРёРѕСЂРёС‚РµС‚РЅР°СЏ РѕС‡РµСЂРµРґСЊ РґР»СЏ РІС‹Р±РѕСЂР° РІРµСЂС€РёРЅС‹ СЃ РјРёРЅРёРјР°Р»СЊРЅС‹Рј СЂР°СЃСЃС‚РѕСЏРЅРёРµРј
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
     weights[startVertex] = 0;
     pq.push({0, startVertex});
     while (!pq.empty()) {
-        // Извлекаем вершину с минимальным расстоянием
+        // РР·РІР»РµРєР°РµРј РІРµСЂС€РёРЅСѓ СЃ РјРёРЅРёРјР°Р»СЊРЅС‹Рј СЂР°СЃСЃС‚РѕСЏРЅРёРµРј
         int currentVertex = pq.top().second;
         pq.pop();
-        // Если вершина уже посещена, пропускаем
+        // Р•СЃР»Рё РІРµСЂС€РёРЅР° СѓР¶Рµ РїРѕСЃРµС‰РµРЅР°, РїСЂРѕРїСѓСЃРєР°РµРј
         if (visited[currentVertex])
             continue;
         visited[currentVertex] = true;
-        // Если достигли конечной вершины, выходим
+        // Р•СЃР»Рё РґРѕСЃС‚РёРіР»Рё РєРѕРЅРµС‡РЅРѕР№ РІРµСЂС€РёРЅС‹, РІС‹С…РѕРґРёРј
         if (currentVertex == endVertex)
             break;
-        // Обновляем расстояния до соседних вершин
+        // РћР±РЅРѕРІР»СЏРµРј СЂР°СЃСЃС‚РѕСЏРЅРёСЏ РґРѕ СЃРѕСЃРµРґРЅРёС… РІРµСЂС€РёРЅ
         for (auto& edge : edges[currentVertex]) {
             int neighbor = edge.destination;
             int newDistance = weights[currentVertex] + edge.weight;
@@ -77,10 +77,10 @@ vector<int> Graph::dijkstra(int startVertex, int endVertex) {
             }
         }
     }
-    // Восстанавливаем путь от конечной вершины к начальной
+    // Р’РѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїСѓС‚СЊ РѕС‚ РєРѕРЅРµС‡РЅРѕР№ РІРµСЂС€РёРЅС‹ Рє РЅР°С‡Р°Р»СЊРЅРѕР№
     vector<int> path;
     if (weights[endVertex] == INT_MAX) {
-        // Путь не существует
+        // РџСѓС‚СЊ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚
         return path;
     }
     for (int vertex = endVertex; vertex != -1; vertex = previous[vertex]) {
@@ -92,7 +92,7 @@ vector<int> Graph::dijkstra(int startVertex, int endVertex) {
 void demonstration() {
     Graph graph(6);
 
-    // Добавляем ребра
+    // Р”РѕР±Р°РІР»СЏРµРј СЂРµР±СЂР°
     graph.addEdge(0, 1, 8);
     graph.addEdge(0, 2, 4);
     graph.addEdge(1, 3, 6);
@@ -110,9 +110,9 @@ void demonstration() {
         vector<int> testPath = graph.dijkstra(pair.first, pair.second);
 
         if (testPath.empty()) {
-            cout << "Путь от вершины " << pair.first << " к вершине " << pair.second << " не существует!" << endl;
+            cout << "РџСѓС‚СЊ РѕС‚ РІРµСЂС€РёРЅС‹ " << pair.first << " Рє РІРµСЂС€РёРЅРµ " << pair.second << " РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚!" << endl;
         } else {
-            cout << "Путь от вершины " << pair.first << " к вершине " << pair.second << ": ";
+            cout << "РџСѓС‚СЊ РѕС‚ РІРµСЂС€РёРЅС‹ " << pair.first << " Рє РІРµСЂС€РёРЅРµ " << pair.second << ": ";
             for (size_t i = 0; i < testPath.size(); i++) {
                 cout << testPath[i];
                 if (i != testPath.size() - 1) cout << " <- ";
@@ -122,19 +122,19 @@ void demonstration() {
     }
 }
 
-// Функция для интерактивной работы с графом
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ РёРЅС‚РµСЂР°РєС‚РёРІРЅРѕР№ СЂР°Р±РѕС‚С‹ СЃ РіСЂР°С„РѕРј
 void interactiveMode() {
     int vertices;
-    cout << "Введите количество вершин в графе: ";
+    cout << "Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ РІРµСЂС€РёРЅ РІ РіСЂР°С„Рµ: ";
     cin >> vertices;
 
     Graph graph(vertices);
 
     int edges;
-    cout << "Введите количество ребер: ";
+    cout << "Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЂРµР±РµСЂ: ";
     cin >> edges;
 
-    cout << "Введите ребра в формате: исходная_вершина конечная_вершина вес" << endl;
+    cout << "Р’РІРµРґРёС‚Рµ СЂРµР±СЂР° РІ С„РѕСЂРјР°С‚Рµ: РёСЃС…РѕРґРЅР°СЏ_РІРµСЂС€РёРЅР° РєРѕРЅРµС‡РЅР°СЏ_РІРµСЂС€РёРЅР° РІРµСЃ" << endl;
     for (int i = 0; i < edges; i++) {
         int src, dest, weight;
         cin >> src >> dest >> weight;
@@ -142,10 +142,10 @@ void interactiveMode() {
     }
 
     while (true) {
-        cout << "1. Показать структуру графа" << endl;
-        cout << "2. Найти кратчайший путь" << endl;
-        cout << "3. Выход" << endl;
-        cout << "Выберите опцию: ";
+        cout << "1. РџРѕРєР°Р·Р°С‚СЊ СЃС‚СЂСѓРєС‚СѓСЂСѓ РіСЂР°С„Р°" << endl;
+        cout << "2. РќР°Р№С‚Рё РєСЂР°С‚С‡Р°Р№С€РёР№ РїСѓС‚СЊ" << endl;
+        cout << "3. Р’С‹С…РѕРґ" << endl;
+        cout << "Р’С‹Р±РµСЂРёС‚Рµ РѕРїС†РёСЋ: ";
 
         int choice;
         cin >> choice;
@@ -156,22 +156,22 @@ void interactiveMode() {
                 break;
             case 2: {
                 int start, end;
-                cout << "Введите начальную вершину: ";
+                cout << "Р’РІРµРґРёС‚Рµ РЅР°С‡Р°Р»СЊРЅСѓСЋ РІРµСЂС€РёРЅСѓ: ";
                 cin >> start;
-                cout << "Введите конечную вершину: ";
+                cout << "Р’РІРµРґРёС‚Рµ РєРѕРЅРµС‡РЅСѓСЋ РІРµСЂС€РёРЅСѓ: ";
                 cin >> end;
 
                 if (start < 0 || start >= vertices || end < 0 || end >= vertices) {
-                    cout << "Неверные номера вершин!" << endl;
+                    cout << "РќРµРІРµСЂРЅС‹Рµ РЅРѕРјРµСЂР° РІРµСЂС€РёРЅ!" << endl;
                     break;
                 }
 
                 vector<int> path = graph.dijkstra(start, end);
 
                 if (path.empty()) {
-                    cout << "Путь не существует!" << endl;
+                    cout << "РџСѓС‚СЊ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚!" << endl;
                 } else {
-                    cout << "Кратчайший путь: ";
+                    cout << "РљСЂР°С‚С‡Р°Р№С€РёР№ РїСѓС‚СЊ: ";
                     for (size_t i = 0; i < path.size(); i++) {
                         cout << path[i];
                         if (i != path.size() - 1) cout << " -> ";
@@ -183,7 +183,7 @@ void interactiveMode() {
             case 3:
                 return;
             default:
-                cout << "Неверный выбор!" << endl;
+                cout << "РќРµРІРµСЂРЅС‹Р№ РІС‹Р±РѕСЂ!" << endl;
         }
     }
 }
@@ -192,9 +192,9 @@ int main() {
     setlocale(LC_ALL, "Russian");
 
     int mode;
-    cout << "1. Демонстрация на готовом графе" << endl;
-    cout << "2. Интерактивный режим" << endl;
-    cout << "Ваш выбор: ";
+    cout << "1. Р”РµРјРѕРЅСЃС‚СЂР°С†РёСЏ РЅР° РіРѕС‚РѕРІРѕРј РіСЂР°С„Рµ" << endl;
+    cout << "2. РРЅС‚РµСЂР°РєС‚РёРІРЅС‹Р№ СЂРµР¶РёРј" << endl;
+    cout << "Р’Р°С€ РІС‹Р±РѕСЂ: ";
     cin >> mode;
     system("cls");
 

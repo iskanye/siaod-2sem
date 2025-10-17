@@ -1,4 +1,4 @@
-// Битовые операции
+// Р‘РёС‚РѕРІС‹Рµ РѕРїРµСЂР°С†РёРё
 #include <cstdlib>
 #include <iostream>
 #include <Windows.h>
@@ -11,16 +11,16 @@ int main1()
     SetConsoleOutputCP(1251);
 
     unsigned int x = 25;
-    const int n = sizeof(int)*8; //=32 количество разрядов в числе типа int
-    unsigned maska = (1 << n - 1); //1 в старшем бите 32-разрядной сетки
+    const int n = sizeof(int)*8; //=32 РєРѕР»РёС‡РµСЃС‚РІРѕ СЂР°Р·СЂСЏРґРѕРІ РІ С‡РёСЃР»Рµ С‚РёРїР° int
+    unsigned maska = (1 << n - 1); //1 РІ СЃС‚Р°СЂС€РµРј Р±РёС‚Рµ 32-СЂР°Р·СЂСЏРґРЅРѕР№ СЃРµС‚РєРё
 
-    cout << "Начальный вид маски: " << bitset<n>(maska) << endl;
-    cout << "Peзультат: ";
+    cout << "РќР°С‡Р°Р»СЊРЅС‹Р№ РІРёРґ РјР°СЃРєРё: " << bitset<n>(maska) << endl;
+    cout << "PeР·СѓР»СЊС‚Р°С‚: ";
 
-    for (int i = 1; i <= n; i++) //32 paзa
+    for (int i = 1; i <= n; i++) //32 paР·a
     {
         cout << ((x & maska) >> (n - i));
-        maska = maska >> 1; // смещение 1 в маске на разряд вправо
+        maska = maska >> 1; // СЃРјРµС‰РµРЅРёРµ 1 РІ РјР°СЃРєРµ РЅР° СЂР°Р·СЂСЏРґ РІРїСЂР°РІРѕ
     }
 
     cout << endl;
