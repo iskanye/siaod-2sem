@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// Звено дерева
+// Р—РІРµРЅРѕ РґРµСЂРµРІР°
 struct Node {
     char key;
     Node* left;
@@ -14,12 +14,12 @@ struct Node {
     Node(char k) : key(k), left(nullptr), right(nullptr), height(1) {}
 };
 
-// Поиск высоты поддерева
+// РџРѕРёСЃРє РІС‹СЃРѕС‚С‹ РїРѕРґРґРµСЂРµРІР°
 int height(Node* N) {
     return N ? N->height : 0;
 }
 
-// Правый поворот
+// РџСЂР°РІС‹Р№ РїРѕРІРѕСЂРѕС‚
 Node* rightRotate(Node* y) {
     Node* x = y->left;
     Node* temp = x->right;
@@ -33,7 +33,7 @@ Node* rightRotate(Node* y) {
     return x;
 }
 
-// Левый поворот
+// Р›РµРІС‹Р№ РїРѕРІРѕСЂРѕС‚
 Node* leftRotate(Node* x) {
     Node* y = x->right;
     Node* temp = y->left;
@@ -47,13 +47,13 @@ Node* leftRotate(Node* x) {
     return y;
 }
 
-// Поиск разницы высот поддеревьев
+// РџРѕРёСЃРє СЂР°Р·РЅРёС†С‹ РІС‹СЃРѕС‚ РїРѕРґРґРµСЂРµРІСЊРµРІ
 int getBalance(Node* node) {
     if (!node) return 0;
     return height(node->left) - height(node->right);
 }
 
-// Балансировка
+// Р‘Р°Р»Р°РЅСЃРёСЂРѕРІРєР°
 Node* balance(Node* node){
     if (!node)
         return nullptr;
@@ -80,7 +80,7 @@ Node* balance(Node* node){
     return node;
 }
 
-// Вставка звена в поддерево
+// Р’СЃС‚Р°РІРєР° Р·РІРµРЅР° РІ РїРѕРґРґРµСЂРµРІРѕ
 Node* insert(Node* node, char key) {
     if (!node)
         return new Node(key);
@@ -89,13 +89,13 @@ Node* insert(Node* node, char key) {
         node->left = insert(node->left, key);
     else if (key > node->key)
         node->right = insert(node->right, key);
-    else // равные ключи не допускаются
+    else // СЂР°РІРЅС‹Рµ РєР»СЋС‡Рё РЅРµ РґРѕРїСѓСЃРєР°СЋС‚СЃСЏ
         return node;
 
     return balance(node);
 }
 
-// Поиск наименьшего звена в поддереве
+// РџРѕРёСЃРє РЅР°РёРјРµРЅСЊС€РµРіРѕ Р·РІРµРЅР° РІ РїРѕРґРґРµСЂРµРІРµ
 Node* findMinNode(Node* node) {
     Node* current = node;
     while (current && current->left) {
@@ -104,45 +104,45 @@ Node* findMinNode(Node* node) {
     return current;
 }
 
-// Удалить ноду из поддерева
+// РЈРґР°Р»РёС‚СЊ РЅРѕРґСѓ РёР· РїРѕРґРґРµСЂРµРІР°
 Node* deleteNode(Node* node, char value) {
     if (!node) {
         return nullptr;
     }
 
-    // Поиск удаляемого узла
+    // РџРѕРёСЃРє СѓРґР°Р»СЏРµРјРѕРіРѕ СѓР·Р»Р°
     if (value < node->key) {
         node->left = deleteNode(node->left, value);
     } else if (value > node->key) {
         node->right = deleteNode(node->right, value);
     } else {
-        // Узел найден - выполняем удаление
+        // РЈР·РµР» РЅР°Р№РґРµРЅ - РІС‹РїРѕР»РЅСЏРµРј СѓРґР°Р»РµРЅРёРµ
 
-        // Узел с одним потомком или без потомков
+        // РЈР·РµР» СЃ РѕРґРЅРёРј РїРѕС‚РѕРјРєРѕРј РёР»Рё Р±РµР· РїРѕС‚РѕРјРєРѕРІ
         if (!node->left || !node->right) {
             Node* temp = node->left ? node->left : node->right;
 
-            // Нет потомков
+            // РќРµС‚ РїРѕС‚РѕРјРєРѕРІ
             if (!temp) {
                 node = nullptr;
             } else {
-                // Один потомок
-                *node = *temp; // Копируем содержимое потомка
+                // РћРґРёРЅ РїРѕС‚РѕРјРѕРє
+                *node = *temp; // РљРѕРїРёСЂСѓРµРј СЃРѕРґРµСЂР¶РёРјРѕРµ РїРѕС‚РѕРјРєР°
             }
             delete temp;
         } else {
-            // Узел с двумя потомками
+            // РЈР·РµР» СЃ РґРІСѓРјСЏ РїРѕС‚РѕРјРєР°РјРё
             Node* temp = findMinNode(node->right);
             node->key = temp->key;
             node->right = deleteNode(node->right, temp->key);
         }
     }
 
-    // Балансировка дерева
+    // Р‘Р°Р»Р°РЅСЃРёСЂРѕРІРєР° РґРµСЂРµРІР°
     return balance(node);
 }
 
-// Симметричный обход
+// РЎРёРјРјРµС‚СЂРёС‡РЅС‹Р№ РѕР±С…РѕРґ
 void inOrder(Node* root) {
     if (root) {
         inOrder(root->left);
@@ -165,7 +165,7 @@ void DFS(Node* root) {
     }
 }
 
-// Обход в ширину
+// РћР±С…РѕРґ РІ С€РёСЂРёРЅСѓ
 void breadthFirst(Node* root) {
     if (!root) return;
     queue<Node*> q;
@@ -179,7 +179,7 @@ void breadthFirst(Node* root) {
     }
 }
 
-// Сумма звеньев
+// РЎСѓРјРјР° Р·РІРµРЅСЊРµРІ
 int sumLeafValues(Node* root) {
     if (!root) return 0;
     if (!root->left && !root->right)
@@ -188,18 +188,18 @@ int sumLeafValues(Node* root) {
 }
 
 void info(Node* root) {
-    cout << "Симметричный обход: ";
+    cout << "РЎРёРјРјРµС‚СЂРёС‡РЅС‹Р№ РѕР±С…РѕРґ: ";
     inOrder(root);
     cout << '\n';
     DFS(root);
     cout << '\n';
 
-    cout << "Обход в ширину: ";
+    cout << "РћР±С…РѕРґ РІ С€РёСЂРёРЅСѓ: ";
     breadthFirst(root);
     cout << '\n';
 
-    cout << "Сумма значений листьев: " << sumLeafValues(root) << '\n';
-    cout << "Высота дерева: " << height(root) << '\n';
+    cout << "РЎСѓРјРјР° Р·РЅР°С‡РµРЅРёР№ Р»РёСЃС‚СЊРµРІ: " << sumLeafValues(root) << '\n';
+    cout << "Р’С‹СЃРѕС‚Р° РґРµСЂРµРІР°: " << height(root) << '\n';
 }
 
 int main() {
