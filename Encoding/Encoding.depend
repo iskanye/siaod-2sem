@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1763034610 source:c:\users\iskan\onedrive\Рабочий стол\СиАОД\encoding\fano.cpp
+	<iostream>
+	<string>
+	<vector>
+	<unordered_map>
+	<algorithm>
+	<fstream>
+	<bitset>
+	<sstream>
+	<cmath>
+
+1763031142 source:c:\users\iskan\onedrive\Рабочий стол\СиАОД\encoding\main.cpp
+	<iostream>
+	<clocale>
+	<string>
+
