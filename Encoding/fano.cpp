@@ -10,6 +10,8 @@
 
 using namespace std;
 
+unordered_map<char, int> calculateFrequencies(const string& text);
+
 // Структура для узла дерева Шеннона-Фано
 struct ShannonFanoNode {
     char symbol;
@@ -18,14 +20,6 @@ struct ShannonFanoNode {
 
     ShannonFanoNode(char s, int f) : symbol(s), frequency(f), code("") {}
 };
-
-unordered_map<char, int> calculateFrequencies(const string& text) {
-    unordered_map<char, int> frequencies;
-    for (char c : text) {
-        frequencies[c]++;
-    }
-    return frequencies;
-}
 
 void buildShannonFanoCodes(vector<ShannonFanoNode>& nodes, int start, int end) {
     if (start >= end || start == end - 1)
