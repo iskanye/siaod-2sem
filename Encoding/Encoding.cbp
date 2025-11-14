@@ -32,6 +32,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="fano.cpp" />
+		<Unit filename="huffman.cpp" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>
