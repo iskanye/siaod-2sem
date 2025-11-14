@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1763035653 source:c:\users\iskan\onedrive\Рабочий стол\СиАОД\encoding\fano.cpp
+1763139161 source:c:\users\iskan\onedrive\Рабочий стол\СиАОД\encoding\fano.cpp
 	<iostream>
 	<string>
 	<vector>
@@ -10,13 +10,13 @@
 	<sstream>
 	<cmath>
 
-1763035630 source:c:\users\iskan\onedrive\Рабочий стол\СиАОД\encoding\main.cpp
+1763139161 source:c:\users\iskan\onedrive\Рабочий стол\СиАОД\encoding\main.cpp
 	<iostream>
 	<clocale>
 	<string>
 	<unordered_map>
 
-1763036668 source:c:\users\iskan\onedrive\Рабочий стол\СиАОД\encoding\huffman.cpp
+1763163615 source:c:\users\iskan\onedrive\Рабочий стол\СиАОД\encoding\huffman.cpp
 	<queue>
 	<memory>
 	<string>

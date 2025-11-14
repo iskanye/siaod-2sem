@@ -83,8 +83,10 @@ void testHuffman() {
                    vector<HuffmanNode*>,
                    CompareNodes> pq;
 
+    int len = 0;
     for (auto& pair : frequencies) {
-        pq.push( new HuffmanNode(pair.first, pair.second));
+        pq.push(new HuffmanNode(pair.first, pair.second));
+        len++;
     }
 
     // Построение дерева Хаффмана
@@ -102,12 +104,22 @@ void testHuffman() {
     // Построение кодов
     unordered_map<char, string> huffmanCodes;
     buildHuffmanCodes(root, "", huffmanCodes);
+    double avgLen = 0, disp;
 
     cout << "\nТаблица кодов Хаффмана:" << endl;
     for (auto& pair : huffmanCodes) {
+        avgLen += pair.second.length();
         cout << "'" << pair.first << "' : " << pair.second
              << " (частота: " << frequencies[pair.first] << ")" << endl;
     }
+
+    avgLen /= (double)len;
+
+    for (auto& pair : huffmanCodes) {
+        disp += (pair.second.length() - avgLen) * (pair.second.length() - avgLen);
+    }
+
+    disp /= (double)len;
 
     string compressed = compressHuffman(fullName, huffmanCodes);
     cout << "\nЗакодированная строка: " << compressed << endl;
@@ -124,4 +136,7 @@ void testHuffman() {
     cout << "Исходный размер: " << originalBits << " бит" << endl;
     cout << "Сжатый размер: " << compressedBits << " бит" << endl;
     cout << "Коэффициент сжатия: " << compressionRatio << "%" << endl;
+
+    cout << "\nСредняя длина кода: " << avgLen << " бит" << endl;
+    cout << "Дисперсия: " << disp << endl;
 }
